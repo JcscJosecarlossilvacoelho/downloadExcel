@@ -8,17 +8,19 @@
     <iframe id="myIframe" src="http://168.63.19.195/public/dashboards/wMjhooBQwOum6Fj6IvzJ0qyT6YZL6PP14yuAkIM4?org_slug=default"></iframe>
     <script>
         document.getElementById('downloadButton').addEventListener('click', function() {
-            // Access the iframe element
             var iframe = document.getElementById('myIframe');
-            
-            // Check if the iframe is loaded
-            if (iframe.contentDocument) {
-                // Access the content of the iframe when it's loaded
+
+            iframe.onload = function() {
                 var iframeContent = iframe.contentDocument;
-                alert("Accessed iframe content: " + iframeContent.body.innerHTML);
-            } else {
-                alert("Iframe content is not yet loaded.");
-            }
+                var table = iframeContent.getElementById('yourTableID'); // Replace with your table's actual ID
+
+                if (table) {
+                    var tbody = table.getElementsByTagName('tbody')[0];
+                    alert("Accessed tbody: " + tbody.innerHTML);
+                } else {
+                    alert("Table with the specified ID not found in the iframe content.");
+                }
+            };
         });
     </script>
 </body>
